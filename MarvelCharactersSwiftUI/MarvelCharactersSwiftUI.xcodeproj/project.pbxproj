@@ -13,6 +13,14 @@
 		008A802B2770D88200B60658 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008A80192770D88000B60658 /* ContentView.swift */; };
 		008A802C2770D88200B60658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 008A801A2770D88200B60658 /* Assets.xcassets */; };
 		008A802D2770D88200B60658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 008A801A2770D88200B60658 /* Assets.xcassets */; };
+		008A80372771BB7700B60658 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008A80362771BB7700B60658 /* Constants.swift */; };
+		008A80382771BB7700B60658 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008A80362771BB7700B60658 /* Constants.swift */; };
+		008A803D2771CA8000B60658 /* Principal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008A803C2771CA8000B60658 /* Principal.swift */; };
+		008A803E2771CA8000B60658 /* Principal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008A803C2771CA8000B60658 /* Principal.swift */; };
+		008A80432771D78300B60658 /* MarvelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008A80422771D78300B60658 /* MarvelListViewModel.swift */; };
+		008A80442771D78300B60658 /* MarvelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008A80422771D78300B60658 /* MarvelListViewModel.swift */; };
+		008A80462771DA7300B60658 /* MarvelListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008A80452771DA7300B60658 /* MarvelListView.swift */; };
+		008A80472771DA7300B60658 /* MarvelListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008A80452771DA7300B60658 /* MarvelListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +30,10 @@
 		008A801F2770D88200B60658 /* MarvelCharactersSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelCharactersSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		008A80252770D88200B60658 /* MarvelCharactersSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelCharactersSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		008A80272770D88200B60658 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		008A80362771BB7700B60658 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		008A803C2771CA8000B60658 /* Principal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Principal.swift; sourceTree = "<group>"; };
+		008A80422771D78300B60658 /* MarvelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelListViewModel.swift; sourceTree = "<group>"; };
+		008A80452771DA7300B60658 /* MarvelListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +66,12 @@
 		008A80172770D88000B60658 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				008A80392771C92200B60658 /* Model */,
+				008A803A2771C98500B60658 /* View */,
+				008A803B2771C9BC00B60658 /* ViewModel */,
 				008A80182770D88000B60658 /* MarvelCharactersSwiftUIApp.swift */,
 				008A80192770D88000B60658 /* ContentView.swift */,
+				008A80362771BB7700B60658 /* Constants.swift */,
 				008A801A2770D88200B60658 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -76,6 +92,30 @@
 				008A80272770D88200B60658 /* macOS.entitlements */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		008A80392771C92200B60658 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		008A803A2771C98500B60658 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				008A803C2771CA8000B60658 /* Principal.swift */,
+				008A80452771DA7300B60658 /* MarvelListView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		008A803B2771C9BC00B60658 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				008A80422771D78300B60658 /* MarvelListViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,8 +216,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				008A803D2771CA8000B60658 /* Principal.swift in Sources */,
 				008A802A2770D88200B60658 /* ContentView.swift in Sources */,
+				008A80432771D78300B60658 /* MarvelListViewModel.swift in Sources */,
 				008A80282770D88200B60658 /* MarvelCharactersSwiftUIApp.swift in Sources */,
+				008A80372771BB7700B60658 /* Constants.swift in Sources */,
+				008A80462771DA7300B60658 /* MarvelListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,8 +229,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				008A803E2771CA8000B60658 /* Principal.swift in Sources */,
 				008A802B2770D88200B60658 /* ContentView.swift in Sources */,
+				008A80442771D78300B60658 /* MarvelListViewModel.swift in Sources */,
 				008A80292770D88200B60658 /* MarvelCharactersSwiftUIApp.swift in Sources */,
+				008A80382771BB7700B60658 /* Constants.swift in Sources */,
+				008A80472771DA7300B60658 /* MarvelListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
