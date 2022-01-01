@@ -10,11 +10,16 @@ import Combine
 
 class MarvelListViewModel: ObservableObject {
     
-    @Published var searchQuery = ""
     
+    @Published var searchQuery = ""
+    @Published var CharacterListArray: [Results]? = nil
+    
+    var serviceProxy: Service?
     var searchCancellable: AnyCancellable? = nil
     
     init() {
+        
+        self.serviceProxy = Service()
         
         searchCancellable = $searchQuery
         
@@ -24,12 +29,48 @@ class MarvelListViewModel: ObservableObject {
                 
                 if str == "" {
                     // reset...
+                    self.CharacterListArray = nil
                 }else {
                     //search...
-                    print("WORKS \(str)")
+                    self.CharacterListArray = nil
+                    self.searchCharacters()
                 }
                 
             })
+    }
+    
+    
+    func searchCharacters(){
+        let originalQuery = searchQuery
+        serviceProxy?.getCharactersByName(name: originalQuery) { res in
+            switch res {
+            case .success(let list):
+                DispatchQueue.main.async {
+                    if self.CharacterListArray == nil {
+                        self.CharacterListArray = list
+                    }
+                }
+            case .failure(_):
+                print("Error")
+            }
+            
+        }
+    }
+    
+    func listOfCharacters() {
+        serviceProxy?.getCharactersList(offsetList: 0, limitList: 30) { res in
+            switch res {
+            case .success(let list):
+                DispatchQueue.main.async {
+                    if self.CharacterListArray == nil {
+                        self.CharacterListArray = list
+                    }
+                }
+            case .failure(_):
+                print("Error")
+            }
+            
+        }
     }
     
 }
