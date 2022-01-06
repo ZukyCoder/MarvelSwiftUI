@@ -19,6 +19,7 @@ struct CharacterCellView: View {
             AsyncImage(url: urlString, content: { image in
                 image
                     .resizable()
+                    .cornerRadius(15)
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 150, height: 150)
             },placeholder: {
@@ -46,8 +47,4 @@ struct CharacterCellView: View {
     }
 }
 
-//struct CharacterCellView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CharacterCellView()
-//    }
-//}
+
