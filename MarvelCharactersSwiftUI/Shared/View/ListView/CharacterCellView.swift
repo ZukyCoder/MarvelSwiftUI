@@ -40,11 +40,38 @@ struct CharacterCellView: View {
                     .foregroundColor(.gray)
                     .lineLimit(4)
                     .multilineTextAlignment(.leading)
+                
+                HStack(spacing: 10) {
+                    ForEach(character.urls, id: \.self){ data in
+                        
+                        NavigationLink(destination: WebLink(url: getURL(data: data))
+                                        .navigationTitle(getType(data: data)),
+                                       label: {
+                                Text(getType(data:data))
+                        })
+                        
+                    }
+                    
+                }
+                
             })
             
             Spacer(minLength: 0)
         }
     }
+    
+    func getURL(data: URLElement) -> URL {
+        let url = data.url
+        
+        return URL(string: url)!
+    }
+    
+    func getType(data: URLElement) -> String {
+        let type = data.type
+        
+        return type.capitalized
+    }
+    
 }
 
 

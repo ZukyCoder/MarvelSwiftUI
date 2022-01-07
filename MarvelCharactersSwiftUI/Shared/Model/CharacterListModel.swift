@@ -31,7 +31,7 @@ struct Results: Identifiable ,Codable {
     let series: Series?
     let stories: Stories?
     let events: Comics?
-    let urls: [URLElement]?
+    let urls: [URLElement]
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -41,9 +41,9 @@ struct Results: Identifiable ,Codable {
 }
 
 // MARK: -urls
-struct URLElement: Codable {
-    let type: String?
-    let url: String?
+struct URLElement: Codable, Hashable {
+    let type: String
+    let url: String
     
 }
 
