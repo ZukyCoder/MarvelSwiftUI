@@ -13,6 +13,8 @@ class MarvelListViewModel: ObservableObject {
     
     @Published var searchQuery = ""
     @Published var CharacterListArray: [Results]? = nil
+    @Published var ComicListArray: [ComicResults]? = nil
+    @Published var offset: Int = 0
     
     var serviceProxy: Service?
     var searchCancellable: AnyCancellable? = nil
@@ -58,7 +60,7 @@ class MarvelListViewModel: ObservableObject {
     }
     
     func listOfCharacters() {
-        serviceProxy?.getCharactersList(offsetList: 0, limitList: 30) { res in
+        serviceProxy?.getCharactersList(offsetList: offset, limitList: 30) { res in
             switch res {
             case .success(let list):
                 DispatchQueue.main.async {
@@ -71,6 +73,22 @@ class MarvelListViewModel: ObservableObject {
             }
             
         }
+    }
+    
+    func listOfComics() {
+        serviceProxy?.getComicsList(offsetList: offset, limitList: 30, completion: { res in
+            switch res {
+            case .success(let list):
+                DispatchQueue.main.async {
+                    if self.ComicListArray == nil {
+                        self.ComicListArray = list
+                    }
+                }
+            case .failure(_):
+                print("Error")
+            }
+            
+        })
     }
     
 }

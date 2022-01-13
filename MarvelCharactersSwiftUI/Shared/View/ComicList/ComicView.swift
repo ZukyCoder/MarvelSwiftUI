@@ -8,13 +8,36 @@
 import SwiftUI
 
 struct ComicView: View {
+    
+    @EnvironmentObject var comicListData: MarvelListViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        NavigationView{
+            ScrollView(.vertical, showsIndicators: false, content: {
+                if comicListData.ComicListArray == nil{
+                    ProgressView()
+                        .padding(.top, 30)
+                }else {
+                
+                    ForEach(comicListData.ComicListArray ?? []) { comic in
+                        Text("TEST")
+                    }
+                    
+                }
+            })
+            
+        }
+        .onAppear(perform: {
+            if comicListData.ComicListArray == nil {
+                comicListData.listOfComics()
+            }
+        })
     }
 }
 
-struct ComicView_Previews: PreviewProvider {
-    static var previews: some View {
-        ComicView()
-    }
-}
+//struct ComicView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ComicView()
+//    }
+//}
