@@ -25,7 +25,7 @@ class Service: NSObject {
         .joined()
     }
     
-    private func generalDataTask(request: URLRequest,completion: @escaping (Result<[Results], Error>) -> ()) {
+    private func generalCharacterDataTask(request: URLRequest,completion: @escaping (Result<[Results], Error>) -> ()) {
         URLSession.shared.dataTask(with: request) { (data, resp, err) in
             if let err = err {
                 completion(.failure(err))
@@ -54,6 +54,37 @@ class Service: NSObject {
         }.resume()
     }
     
+    private func generalComicDataTask(request: URLRequest,completion: @escaping (Result<[ComicResults], Error>) -> ()) {
+        print(request)
+        URLSession.shared.dataTask(with: request) { (data, resp, err) in
+            if let err = err {
+                completion(.failure(err))
+                return
+            }
+        
+            guard let APIData = data else {
+                print("no data found")
+                return
+            }
+            
+            do {
+                let entity = try JSONDecoder().decode(ComicListModel.self, from: APIData)
+                guard let statusCode = entity.code, (200..<300) ~= statusCode else {
+                    //completion(.failure(APIError.statusCodeError))
+                  return
+                }
+                let comics = entity.data?.results
+                print(entity)
+                completion(.success(comics ?? []))
+                print(comics)
+            }catch let jsonErr {
+                completion(.failure(jsonErr))
+                print(jsonErr.localizedDescription)
+            }
+            
+        }.resume()
+    }
+    
     
     func getCharactersList(offsetList: Int, limitList: Int ,completion: @escaping (Result<[Results], Error>) -> ()) {
         
@@ -69,7 +100,7 @@ class Service: NSObject {
         
         let request = URLRequest(url: url.url! )
         
-        generalDataTask(request: request) { (res) in
+        generalCharacterDataTask(request: request) { (res) in
             switch res {
                 
             case .success(let characterList):
@@ -95,7 +126,7 @@ class Service: NSObject {
         
         let request = URLRequest(url: url.url! )
         
-        generalDataTask(request: request) { (res) in
+        generalCharacterDataTask(request: request) { (res) in
             switch res {
                 
             case .success(let characterList):
@@ -119,7 +150,7 @@ class Service: NSObject {
         }
         
         let request = URLRequest(url: url.url! )
-        generalDataTask(request: request) { (res) in
+        generalCharacterDataTask(request: request) { (res) in
             switch res {
                 
             case .success(let characterList):
@@ -131,5 +162,28 @@ class Service: NSObject {
         
     }
     
+    func getComicsList(offsetList: Int, limitList: Int ,completion: @escaping (Result<[ComicResults], Error>) -> ()) {
+        
+        let myHash = MD5(data: "\(Service.ts)\(Service.privateKey)\(Service.apiKey)")
+        let urlString = EndPoint.baseUrl.rawValue+EndPoint.comics.rawValue
+        
+        let params = ["ts": Service.ts, "apikey": Service.apiKey, "hash": myHash, "offset": String(offsetList), "limit": String(limitList)] as Dictionary<String,String>
+        
+       var url = URLComponents(string: urlString)!
+        url.queryItems = params.map { (key, value) in
+            URLQueryItem(name: key, value: value)
+        }
+        
+        let request = URLRequest(url: url.url! )
+        
+        generalComicDataTask(request: request) { (res) in
+            switch res {
+            case .success(let characterList):
+                completion(.success(characterList))
+            case .failure(_):
+                return
+            }
+        }
+    }
     
 }

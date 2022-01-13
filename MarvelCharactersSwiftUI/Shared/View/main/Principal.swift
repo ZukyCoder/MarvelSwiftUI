@@ -11,6 +11,7 @@ struct Principal: View {
     
     @StateObject var listData = MarvelListViewModel()
     
+    
     var body: some View {
         TabView{
             MarvelListView()
@@ -19,11 +20,12 @@ struct Principal: View {
                     Text("Charaters")
                 }
                 .environmentObject(listData)
-            Text("Comics")
+            ComicView()
                 .tabItem{
                     Image(systemName: "book.circle")
                     Text("Comics")
                 }
+                .environmentObject(listData)
         }
     }
 }

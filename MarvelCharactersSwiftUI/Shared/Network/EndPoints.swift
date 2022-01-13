@@ -11,5 +11,5 @@ enum EndPoint: String {
     
     case baseUrl = "https://gateway.marvel.com/v1/public"
     case characters = "/characters"
-    
+    case comics = "/comics"
 }
